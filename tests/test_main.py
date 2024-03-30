@@ -1,5 +1,5 @@
 import unittest
-from app.main import find_repositories, get_commits 
+from app.main import find_repositories, get_commits, main
 from git import Repo
 
 class TestGitSome(unittest.TestCase):
@@ -10,4 +10,6 @@ class TestGitSome(unittest.TestCase):
             self.assertIsInstance(repository, Repo)
             commits = get_commits(repository)
             print(commits)
+
+        main()
     
