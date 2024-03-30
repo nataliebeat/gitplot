@@ -19,10 +19,16 @@ def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
 
     return repos
 
-def get_commits(repo: Repo, commits: int = 1) -> list[Commit]:
+def get_commits(repo: Repo, commits: int = 1, since: timedelta = timedelta()) -> list[Commit]:
     repo_commits = repo.iter_commits("master", max_count=commits)
+    result = list(repo_commits)
+    if timedelta != 0:
+        return [commit for commit in result if commit_is_since(commit, since)]
+    else:
+        return result
+        
 
-    return list(repo_commits)
+
 
 def commit_is_since(commit: Commit, since: timedelta) -> bool:
     commit_datetime = commit.committed_datetime
