@@ -14,7 +14,7 @@ def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
                 print("isdir" + child)
                 repo = Repo(child_path)
             except GitError:
-                print(child_path + " was no correctly loaded!")
+                print(child_path + " was not correctly loaded!")
                 print(GitError)
             else:
                 repos.append(repo)
