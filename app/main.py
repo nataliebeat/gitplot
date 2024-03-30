@@ -13,4 +13,11 @@ def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
 
     return repos
 
+def main():
+    repos: list[Repo] = find_repositories()
+
+if __name__ == "__main__":
+    main()
+
+
         
