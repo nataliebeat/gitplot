@@ -11,15 +11,11 @@ def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
         child_path = os.path.join(dirpath, child)
         if os.path.isdir(child_path):
             try:
-                print("isdir" + child)
                 repo = Repo(child_path)
             except GitError:
                 print(child_path + " was not correctly loaded!")
-                print(GitError)
             else:
                 repos.append(repo)
-        else:
-            print("noisdir" + child)
 
     return repos
 
@@ -35,7 +31,6 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
         return False
     else:
         return True
-    
 
 def main():
     repos: list[Repo] = find_repositories()
@@ -45,7 +40,7 @@ def main():
         recent_commits = [commit for commit in commits if commit_is_since(commit, timedelta(days=7))]
         repo_dict[repo.working_tree_dir] = recent_commits
 
-    print(repo_dict)
+    return repo_dict
         
 
 if __name__ == "__main__":
