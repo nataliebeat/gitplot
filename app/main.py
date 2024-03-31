@@ -34,6 +34,7 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
     commit_datetime = commit.committed_datetime
     my_since: timedelta = datetime.now(timezone.utc) - commit_datetime
     print(my_since)
+    print(since)
     if my_since > since:
         print('f')
         return False

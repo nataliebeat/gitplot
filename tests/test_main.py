@@ -1,7 +1,7 @@
 import unittest
-from app.main import find_repositories, get_commits, main
+from app.main import find_repositories, get_commits, main, commit_is_since
 from git import Repo, Commit
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 from unittest.mock import Mock, patch
 
 class TestGitSome(unittest.TestCase):
@@ -25,7 +25,13 @@ class TestGitSome(unittest.TestCase):
                 print(str(commit.message) + " since last week")
 
     def test_commit_is_since(self):
-       pass 
+        mock_late_commit = Mock()
+        mock_late_commit.committed_datetime = datetime.now(timezone.utc) - timedelta(days=8)
+        mock_early_commit = Mock()
+        mock_early_commit.committed_datetime = datetime.now(timezone.utc) - timedelta(days=4)
+        self.assertTrue(commit_is_since(mock_early_commit, timedelta(days=7)))
+        self.assertFalse(commit_is_since(mock_late_commit, timedelta(days=7)))
+        
 
     @unittest.skip("funsies")
     def test_main(self):
