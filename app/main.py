@@ -33,9 +33,12 @@ def get_commits(repo: Repo, commits: int = 1, since: timedelta = timedelta()) ->
 def commit_is_since(commit: Commit, since: timedelta) -> bool:
     commit_datetime = commit.committed_datetime
     my_since: timedelta = datetime.now(timezone.utc) - commit_datetime
+    print(my_since)
     if my_since > since:
+        print('f')
         return False
     else:
+        print('t')
         return True
 
 def main():
