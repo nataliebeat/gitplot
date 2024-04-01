@@ -11,7 +11,6 @@ class TestGitSome(unittest.TestCase):
         for repo in self.repos:
             self.assertIsInstance(repo, Repo)
 
-    @unittest.skip("fun")
     def test_can_get_commits(self):
         for repo in self.repos:
             one_each = get_commits(repo)

@@ -40,12 +40,12 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
         print('t')
         return True
 
-def main():
+def main(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
     repos: list[Repo] = find_repositories()
     repo_dict: dict = {}
     for repo in repos:
-        commits = get_commits(repo, commits = 10)
-        recent_commits = [commit for commit in commits if commit_is_since(commit, timedelta(days=7))]
+        commits = get_commits(repo, commits = max_commits)
+        recent_commits = [commit for commit in commits if commit_is_since(commit, since)]
         print(repo, recent_commits)
         repo_dict[repo.working_tree_dir] = recent_commits
 
