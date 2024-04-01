@@ -19,13 +19,10 @@ def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
 
     return repos
 
-def get_commits(repo: Repo, commits: int = 1, since: timedelta = timedelta()) -> list[Commit]:
+def get_commits(repo: Repo, commits: int = 1) -> list[Commit]:
     repo_commits = repo.iter_commits("master", max_count=commits)
     result = list(repo_commits)
-    if timedelta != 0:
-        return [commit for commit in result if commit_is_since(commit, since)]
-    else:
-        return result
+    return result
         
 
 
@@ -48,6 +45,7 @@ def main():
     for repo in repos:
         commits = get_commits(repo, commits = 10)
         recent_commits = [commit for commit in commits if commit_is_since(commit, timedelta(days=7))]
+        print(repo, recent_commits)
         repo_dict[repo.working_tree_dir] = recent_commits
 
     return repo_dict

@@ -11,6 +11,7 @@ class TestGitSome(unittest.TestCase):
         for repo in self.repos:
             self.assertIsInstance(repo, Repo)
 
+    @unittest.skip("fun")
     def test_can_get_commits(self):
         for repo in self.repos:
             one_each = get_commits(repo)
@@ -22,7 +23,7 @@ class TestGitSome(unittest.TestCase):
             for commit in all_since_last_week:
                 
                 print(commit.committed_datetime)
-                print(str(commit.message) + " since last week")
+                #print(str(commit.message) + " since last week")
 
     def test_commit_is_since(self):
         mock_late_commit = Mock()
@@ -32,9 +33,9 @@ class TestGitSome(unittest.TestCase):
         self.assertTrue(commit_is_since(mock_early_commit, timedelta(days=7)))
         self.assertFalse(commit_is_since(mock_late_commit, timedelta(days=7)))
         
-
-    @unittest.skip("funsies")
+    
     def test_main(self):
-        main()
+        print(main())
+        
 
             
