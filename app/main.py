@@ -1,11 +1,12 @@
 from git import Repo, Commit, GitError
 import os
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
 import time
 
-CODE_REPOSITORY = os.path.abspath("/home/natalie/code/")
+CODE_REPOSITORY = Path(__file__).parent
 
-def find_repositories(dirpath: str = CODE_REPOSITORY) -> list[Repo]:
+def find_repositories(dirpath: Path = CODE_REPOSITORY) -> list[Repo]:
     repos: list[Repo] = []
     for child in os.listdir(dirpath):
         child_path = os.path.join(dirpath, child)
