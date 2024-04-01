@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 import time
 
-CODE_REPOSITORY = Path(__file__).parent
+CODE_REPOSITORY = Path(__file__).parent.parent.parent
 
 def find_repositories(dirpath: Path = CODE_REPOSITORY) -> list[Repo]:
     repos: list[Repo] = []
