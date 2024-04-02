@@ -12,7 +12,7 @@ def plot_repo_by_commit_count():
     plt.bar(repos, commit_count)
     return plt
 
-def plot_repo_commit_history(days: int = 500):
+def plot_repo_commit_history(days: int = 70):
     git_data = main(since=timedelta(days=days))
     repos = list(git_data.keys())
     today = datetime.now()
