@@ -6,6 +6,10 @@ import time
 
 CODE_REPOSITORY = Path(__file__).parent.parent.parent
 
+def clean_repo_name(repo: Repo) -> str:
+    path = repo.working_tree_dir
+    return str(path).split("/")[-1]
+
 def find_repositories(dirpath: Path = CODE_REPOSITORY) -> list[Repo]:
     repos: list[Repo] = []
     for child in os.listdir(dirpath):
@@ -47,7 +51,7 @@ def main(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
         commits = get_commits(repo, commits = max_commits)
         recent_commits = [commit for commit in commits if commit_is_since(commit, since)]
         print(repo, recent_commits)
-        repo_dict[repo.working_tree_dir] = recent_commits
+        repo_dict[clean_repo_name(repo)] = recent_commits
 
     return repo_dict
         
