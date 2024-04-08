@@ -1,9 +1,5 @@
 import unittest
-<<<<<<< HEAD:tests/test_main.py
-from gitsome.main import find_repositories, get_commits, main, commit_is_since
-=======
-from app.git_tools import find_repositories, get_commits, scan_repos, commit_is_since
->>>>>>> 8bbf8a7 (move previous 'main' to 'git_tools'):tests/test_git_tools.py
+from gitsome.git_tools import find_repositories, get_commits, scan_repos, commit_is_since
 from git import Repo, Commit
 from datetime import timedelta, datetime, timezone
 from unittest.mock import Mock, patch
