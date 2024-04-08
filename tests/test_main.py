@@ -1,5 +1,5 @@
 import unittest
-from app.main import find_repositories, get_commits, main, commit_is_since
+from gitsome.main import find_repositories, get_commits, main, commit_is_since
 from git import Repo, Commit
 from datetime import timedelta, datetime, timezone
 from unittest.mock import Mock, patch
@@ -14,7 +14,7 @@ class TestGitSome(unittest.TestCase):
     def test_can_get_commits(self):
         for repo in self.repos:
             one_each = get_commits(repo)
-            all_since_last_week = get_commits(repo,commits=100, since=timedelta(weeks=1))
+            all_since_last_week = get_commits(repo,commits=100)
             for commit in one_each:
                 
                print(str(commit.message) + " one each")

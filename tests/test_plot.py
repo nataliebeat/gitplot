@@ -1,5 +1,5 @@
 import unittest
-from app.plot import git_data, plot_repo_by_commit_count, plot_repo_commit_history
+from gitsome.plot import git_data, plot_repo_by_commit_count, plot_repo_commit_history
 
 class TestPlot(unittest.TestCase):
     def test_git_data(self):
