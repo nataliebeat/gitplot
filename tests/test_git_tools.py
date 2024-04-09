@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 
 class TestGitSome(unittest.TestCase):
     def setUp(self):
-        self.repos = find_repositories()
+        self.repos = find_repositories(['../../cribbage', '../../abermidi/'])
     def test_can_find_repos(self):
         for repo in self.repos:
             self.assertIsInstance(repo, Repo)
@@ -34,7 +34,7 @@ class TestGitSome(unittest.TestCase):
         
     
     def test_scan_repos(self):
-        print(scan_repos())
+        print(scan_repos(['../abermidi']))
         
 
             

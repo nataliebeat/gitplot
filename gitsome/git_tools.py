@@ -4,23 +4,19 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 import time
 
-CODE_REPOSITORY = Path(__file__).parent.parent.parent
-
 def clean_repo_name(repo: Repo) -> str:
     path = repo.working_tree_dir
     return str(path).split("/")[-1]
 
-def find_repositories(dirpath: Path = CODE_REPOSITORY) -> list[Repo]:
+def find_repositories(repo_list: list[str]) -> list[Repo]:
     repos: list[Repo] = []
-    for child in os.listdir(dirpath):
-        child_path = os.path.join(dirpath, child)
-        if os.path.isdir(child_path):
-            try:
-                repo = Repo(child_path)
-            except GitError:
-                print(child_path + " was not correctly loaded!")
-            else:
-                repos.append(repo)
+    for repo_directory in repo_list:
+        try:
+            repo = Repo(repo_directory)
+        except GitError:
+            print(repo_directory + " was not correctly loaded!")
+        else:
+            repos.append(repo)
 
     return repos
 
@@ -44,8 +40,8 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
         print('t')
         return True
 
-def scan_repos(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
-    repos: list[Repo] = find_repositories()
+def scan_repos(repo_dirs: list[str], max_commits: int = 1000, since: timedelta = timedelta(days=7)):
+    repos: list[Repo] = find_repositories(repo_dirs)
     repo_dict: dict = {}
     for repo in repos:
         commits = get_commits(repo, commits = max_commits)
