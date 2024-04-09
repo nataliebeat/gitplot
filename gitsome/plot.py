@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta, timezone
 from .git_tools import scan_repos, commit_is_since
+import os
 
-git_data = scan_repos()
 
-def plot_repo_by_commit_count():
+
+def plot_repo_by_commit_count(repo_dirs):
+    git_data = scan_repos(repo_dirs)
     repos = list(git_data.keys())
     repo_commits = git_data.values()
     commit_count = [len(commits) for commits in repo_commits]
@@ -12,8 +14,8 @@ def plot_repo_by_commit_count():
     plt.bar(repos, commit_count)
     return plt
 
-def plot_repo_commit_history(days: int = 70):
-    git_data = scan_repos(since=timedelta(days=days))
+def plot_repo_commit_history(repo_dirs, days: int = 70):
+    git_data = scan_repos(repo_dirs, since=timedelta(days=days))
     repos = list(git_data.keys())
     today = datetime.now()
     dates = []
