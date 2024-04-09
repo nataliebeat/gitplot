@@ -46,13 +46,10 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
         print('t')
         return True
 
-<<<<<<< HEAD
-def scan_repos(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
-=======
 def main(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
     args = parser.parse_args()
     print(args.echo)
->>>>>>> 258ace3 (connect it into main() . perhaps move default list to conf files)
+    print(args)
     repos: list[Repo] = find_repositories()
     repo_dict: dict = {}
     for repo in repos:
