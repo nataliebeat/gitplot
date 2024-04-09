@@ -1,5 +1,4 @@
 from .cli import parser
+from .main import main
 
-args = parser.parse_args()
-print(args.echo)
-
+main()

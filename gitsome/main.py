@@ -4,6 +4,8 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 import time
 
+from .cli import parser
+
 CODE_REPOSITORY = Path(__file__).parent.parent.parent
 
 def clean_repo_name(repo: Repo) -> str:
@@ -44,7 +46,13 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
         print('t')
         return True
 
+<<<<<<< HEAD
 def scan_repos(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
+=======
+def main(max_commits: int = 1000, since: timedelta = timedelta(days=7)):
+    args = parser.parse_args()
+    print(args.echo)
+>>>>>>> 258ace3 (connect it into main() . perhaps move default list to conf files)
     repos: list[Repo] = find_repositories()
     repo_dict: dict = {}
     for repo in repos:
