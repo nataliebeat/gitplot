@@ -1,5 +1,5 @@
 import unittest
-from gitsome.git_tools import find_repositories, get_commits, scan_repos, commit_is_since
+from gitsome.git_tools import find_repositories, get_commits, scan_repos, commit_is_since, get_main_branch
 from git import Repo, Commit
 from datetime import timedelta, datetime, timezone
 from unittest.mock import Mock, patch
@@ -23,6 +23,7 @@ class TestGitSome(unittest.TestCase):
                 
                 print(commit.committed_datetime)
                 #print(str(commit.message) + " since last week")
+
 
     def test_commit_is_since(self):
         mock_late_commit = Mock()

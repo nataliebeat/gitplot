@@ -1,4 +1,4 @@
-from git import Repo, Commit, GitError
+from git import Repo, Commit, GitError, Head
 import os
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
@@ -21,10 +21,10 @@ def find_repositories(repo_list: list[str]) -> list[Repo]:
     return repos
 
 def get_commits(repo: Repo, commits: int = 1) -> list[Commit]:
-    repo_commits = repo.iter_commits("master", max_count=commits)
+
+    repo_commits = repo.iter_commits(repo.active_branch, max_count=commits)
     result = list(repo_commits)
     return result
-        
 
 
 
