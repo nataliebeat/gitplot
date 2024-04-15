@@ -1,3 +1,3 @@
 # Gitsome
 
-A tool for comparing the histories between Git repos.
+A tool for comparing the histories of multiple Git repos.
