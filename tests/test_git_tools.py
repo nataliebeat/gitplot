@@ -1,5 +1,5 @@
 import unittest
-from gitsome.git_tools import find_repositories, get_commits, scan_repos, commit_is_since, get_main_branch
+from gitplot.git_tools import find_repositories, get_commits, scan_repos, commit_is_since, get_main_branch
 from git import Repo, Commit
 from datetime import timedelta, datetime, timezone
 from unittest.mock import Mock, patch

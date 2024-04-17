@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from argparse import ArgumentError
 
-from gitsome.cli import parser
+from gitplot.cli import parser
 
 
 class TestCliArgs(unittest.TestCase):

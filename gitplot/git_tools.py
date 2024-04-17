@@ -1,8 +1,5 @@
-from git import Repo, Commit, GitError, Head
-import os
-from pathlib import Path
+from git import Repo, Commit, GitError
 from datetime import datetime, timedelta, timezone
-import time
 
 def clean_repo_name(repo: Repo) -> str:
     path = repo.working_tree_dir
@@ -17,7 +14,6 @@ def find_repositories(repo_list: list[str]) -> list[Repo]:
             print(repo_directory + " was not correctly loaded!")
         else:
             repos.append(repo)
-
     return repos
 
 def get_commits(repo: Repo, commits: int = 1) -> list[Commit]:
@@ -25,8 +21,6 @@ def get_commits(repo: Repo, commits: int = 1) -> list[Commit]:
     repo_commits = repo.iter_commits(repo.active_branch, max_count=commits)
     result = list(repo_commits)
     return result
-
-
 
 def commit_is_since(commit: Commit, since: timedelta) -> bool:
     commit_datetime = commit.committed_datetime
@@ -50,8 +44,3 @@ def scan_repos(repo_dirs: list[str], max_commits: int = 1000, since: timedelta =
         repo_dict[clean_repo_name(repo)] = recent_commits
 
     return repo_dict
-        
-
-
-
-        
