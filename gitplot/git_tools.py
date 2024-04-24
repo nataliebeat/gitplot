@@ -38,7 +38,7 @@ def commit_is_since(commit: Commit, since: timedelta) -> bool:
     print('t')
     return True
 
-def scan_repos(repo_dirs: list[str], max_commits: int = 1000, since: timedelta = timedelta(days=7)):
+def scan_repos(repo_dirs: list[str], max_commits: int = 1000, since: timedelta = timedelta(days=0)):
     """
     Given a list of directories, return a dictionary,
     with all the information needed for plotting.
@@ -47,8 +47,10 @@ def scan_repos(repo_dirs: list[str], max_commits: int = 1000, since: timedelta =
     repo_dict: dict = {}
     for repo in repos:
         commits = get_commits(repo, commits = max_commits)
-        recent_commits = [commit for commit in commits if commit_is_since(commit, since)]
-        print(repo, recent_commits)
-        repo_dict[clean_repo_name(repo)] = recent_commits
+        if since.days != 0:
+            commits = [commit for commit in commits if commit_is_since(commit, since)]
+
+        print(repo, commits)
+        repo_dict[clean_repo_name(repo)] = commits
 
     return repo_dict
