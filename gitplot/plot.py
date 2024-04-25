@@ -1,8 +1,12 @@
 """Plots data from git directories using the .git_tools module and matplotlib"""
+import logging 
 
 from datetime import datetime, timedelta, timezone
 import matplotlib.pyplot as plt
 from .git_tools import scan_repos, commit_is_since
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 def plot_repo_by_commit_count(repo_dirs):
     """Plots amount of commits of given git directories"""
@@ -24,6 +28,7 @@ def plot_repo_commit_history(repo_dirs, days: int = 0):
         earliest_commits = []
         for repo in git_data.items():
             # gets the data of the tuple, then adds last to list of earliest commits
+            logger.debug("Getting earlist commit from: %s", repo)
             earliest_commits.append(repo[1][-1].committed_datetime)
         earliest_commits = [(today - com_date).days for com_date in earliest_commits]
         days = max(earliest_commits)
